@@ -23,3 +23,12 @@ export function getDB() {
   }
   return db;
 }
+
+export async function closeDB() {
+  try {
+    await client.close();
+    console.log("🛑 MongoDB connection closed");
+  } catch (error) {
+    console.error("❌ Error closing MongoDB:", error);
+  }
+}

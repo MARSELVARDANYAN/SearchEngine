@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { connectDb } from "./config/db.js";
+import { connectDb, closeDB } from "./config/db.js";
 import searchRouter from "./routes/search.routes.js";
 import crawlRouter from "./routes/crawl.routes.js";
 import uploadRouter from "./routes/upload.routes.js";
@@ -30,3 +30,15 @@ const startServer = async () => {
 };
 
 startServer();
+
+process.on("SIGINT", async () => {
+  console.log("\n🛑 SIGINT received");
+  await closeDB();
+  process.exit();
+});
+
+process.on("SIGTERM", async () => {
+  console.log("\n🛑 SIGTERM received");
+  await closeDB();
+  process.exit();
+});
