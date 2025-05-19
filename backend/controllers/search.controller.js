@@ -15,11 +15,10 @@ export const poiskController = async (req, res) => {
   const { q } = req.query;
   try {
     const page = await getPages(q);
-    console.log(page);
     if (page.length === 0) {
-      return res.status(200).json(null);
+      return res.status(200).json([]);
     }
-    res.json(page[0].title);
+    res.status(200).json(page[0].url);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
