@@ -1,17 +1,17 @@
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
+import multer from "multer";
+import path from "path";
+import fs from "fs";
 
-const uploadDir = 'public/uploads';
+const uploadDir = "public/uploads";
 if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
+  fs.mkdirSync("public/uploads", { recursive: true });
 }
 
 const allowedTypes = [
-  'application/pdf',
-  'text/plain',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  "application/pdf",
+  "text/plain",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
 const storage = multer.diskStorage({
@@ -28,7 +28,9 @@ const fileFilter = (req, file, cb) => {
   if (allowedTypes.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb(new Error('Invalid file type. Only documents and text files are allowed.'));
+    cb(
+      new Error("Invalid file type. Only documents and text files are allowed.")
+    );
   }
 };
 

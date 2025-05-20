@@ -5,4 +5,4 @@ export const api = axios.create({
 });
 
 
-export const fetchUrl = (queri) => api.get(`/poisk?q=${queri}`);
+export const fetchUrl = (queri) => api.get(`api/poisk?q=${queri}`);
