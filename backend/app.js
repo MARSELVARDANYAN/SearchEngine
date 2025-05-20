@@ -23,10 +23,13 @@ app.use("/api", uploadRouter);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+
+
 app.use(express.static(path.join(__dirname, '../frontend/dist/')));
 
 // Fallback для React Router
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
+  console.log("заходил на фронт");
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
@@ -58,3 +61,7 @@ process.on("SIGTERM", async () => {
   await closeDB();
   process.exit();
 });
+
+//cd frontend && npm install && npm run build && cd ../backend && npm install
+//node backend/app.js
+
