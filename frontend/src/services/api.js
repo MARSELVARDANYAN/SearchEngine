@@ -1,8 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const api = axios.create({
-    baseURL: 'api'
-});
-
-
-export const fetchUrl = (queri) => api.get(`api/poisk?q=${queri}`);
+export const fetchUrl = async (query) => {
+  try {
+    const response = await axios.get(`/api/poisk?q=${encodeURIComponent(query)}`);
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error("Ошибка при получении данных:", error);
+    return [];
+  }
+};

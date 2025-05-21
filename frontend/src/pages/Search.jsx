@@ -28,7 +28,8 @@ export const Search = () => {
     
     try {
       const response = await fetchUrl(query);
-      setUrl(response.data);
+      console.log("Response data:", response);
+      setUrl(response);
     } catch (error) {
       setError("An error occurred while searching. Please try again.");
       console.error(error);

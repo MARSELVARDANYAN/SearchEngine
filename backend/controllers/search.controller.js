@@ -14,14 +14,20 @@ export const searchController = async (req, res) => {
 export const poiskController = async (req, res) => {
   console.log("поиск по запросу", req.query.q);
   const { q } = req.query;
+
   try {
-    const page = await getPages(q);
-    if (page.length === 0) {
+    const pages = await getPages(q);
+    if (!pages || pages.length === 0) {
       return res.status(200).json([]);
     }
-    res.status(200).json(page[0].url);
+
+    // Собираем все ссылки из найденных документов
+    const urls = pages.flatMap(page => page.url || []);
+    console.log(urls);
+    return res.status(200).json(urls);
   } catch (error) {
-    console.error(error);
+    console.error("Ошибка при поиске:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
