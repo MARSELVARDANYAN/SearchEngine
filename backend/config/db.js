@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const uri = "mongodb+srv://marseli93:marsel123456@cluster0.5h0bkhl.mongodb.net/searchengine-cluster?retryWrites=true&w=majority&appName=Cluster0&tls=true";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+
 const client = new MongoClient(uri);
 
 
