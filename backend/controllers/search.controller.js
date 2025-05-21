@@ -12,6 +12,7 @@ export const searchController = async (req, res) => {
 };
 
 export const poiskController = async (req, res) => {
+  console.log("поиск по запросу", req.query.q);
   const { q } = req.query;
   try {
     const page = await getPages(q);
